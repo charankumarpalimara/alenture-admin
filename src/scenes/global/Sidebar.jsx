@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
-import { Box, useTheme, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import {
+  Box,
+  useTheme,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -17,23 +25,36 @@ import logoLight from "./logo.png";
 
 // Shared getActivePage function
 const getActivePage = (pathname) => {
-  if (pathname.includes("/crm") || pathname.includes("/crmform") || pathname.includes("/crmdetails")) {
+  if (
+    pathname.includes("/crm") ||
+    pathname.includes("/crmform") ||
+    pathname.includes("/crmdetails")
+  ) {
     return "/crm";
-  } else if (pathname.includes("/cm") || pathname.includes("/cmform") || pathname.includes("/cmdetails")) {
+  } else if (
+    pathname.includes("/cm") ||
+    pathname.includes("/cmform") ||
+    pathname.includes("/cmdetails")
+  ) {
     return "/cm";
-  } else if (pathname.includes("/hob") || pathname.includes("/form") || pathname.includes("/hobdetails")) {
+  } else if (
+    pathname.includes("/hob") ||
+    pathname.includes("/form") ||
+    pathname.includes("/hobdetails")
+  ) {
     return "/hob";
   } else if (pathname.includes("/notes")) {
     return "/notes";
-  }else if (pathname.includes("/tasks") || pathname.includes("/taskform") ) {
+  } else if (pathname.includes("/tasks") || pathname.includes("/taskform")) {
     return "/tasks";
-  }
-   else if (pathname.includes("/calendar")) {
+  } else if (pathname.includes("/calendar")) {
     return "/calendar";
-  }
-  else if (pathname.includes("/organization") || pathname.includes("/organizationdetails")) {
+  } else if (
+    pathname.includes("/organization") ||
+    pathname.includes("/organizationdetails")
+  ) {
     return "/organization";
-  }  else if (
+  } else if (
     pathname === "/" ||
     pathname.includes("/allExperiences") ||
     pathname.includes("/ticketdetails") ||
@@ -80,7 +101,8 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       <ListItemText
         primary={title}
         sx={{
-          "& .MuiTypography-root": { // Target the nested Typography component
+          "& .MuiTypography-root": {
+            // Target the nested Typography component
             fontWeight: "bold !important", // Ensure text is bold for selected item
             fontSize: "13px",
           },
@@ -107,11 +129,10 @@ const Sidebar = ({ isSidebar, onLogout }) => {
   const logoSrc = logoLight;
 
   const handleLogout = () => {
-    sessionStorage.removeItem('token');
+    sessionStorage.removeItem("token");
     onLogout(); // Call the logout function from props
     // window.location.reload(); // Reload the page to reset the state
-    navigate('/login'); // Navigate to login page
-
+    navigate("/admin/login"); // Navigate to login page
   };
 
   return (
@@ -136,16 +157,31 @@ const Sidebar = ({ isSidebar, onLogout }) => {
           background: "#ffffff",
           boxShadow: "0px 4px 4px -2px rgba(0, 0, 0, 0.1)",
           paddingBottom: 1,
-
         }}
       >
-        <img src={logoSrc} alt="logo" style={{ width: "100%", cursor: "pointer" }} />
+        <img
+          src={logoSrc}
+          alt="logo"
+          style={{ width: "100%", cursor: "pointer" }}
+        />
       </Box>
 
       {/* Menu Items */}
       <List sx={{ padding: "20px" }}>
-        <Item title="Dashboard" to="/" icon={<HomeOutlinedIcon />} selected={selected} setSelected={setSelected} />
-        <Item title="Customer Manager" to="/cm" icon={<PeopleAltOutlinedIcon />} selected={selected} setSelected={setSelected} />
+        <Item
+          title="Dashboard"
+          to="/"
+          icon={<HomeOutlinedIcon />}
+          selected={selected}
+          setSelected={setSelected}
+        />
+        <Item
+          title="Customer Manager"
+          to="/cm"
+          icon={<PeopleAltOutlinedIcon />}
+          selected={selected}
+          setSelected={setSelected}
+        />
         <Item
           title="Customer Relationship Manager"
           to="/crm"
@@ -153,37 +189,58 @@ const Sidebar = ({ isSidebar, onLogout }) => {
           selected={selected}
           setSelected={setSelected}
         />
-       <Item title="Head of the Business" to="/hob" icon={<StorefrontOutlinedIcon />} selected={selected} setSelected={setSelected} />
-        <Item title="Organization" to="/organization" icon={<BusinessOutlinedIcon />} selected={selected} setSelected={setSelected} />
+        <Item
+          title="Head of the Business"
+          to="/hob"
+          icon={<StorefrontOutlinedIcon />}
+          selected={selected}
+          setSelected={setSelected}
+        />
+        <Item
+          title="Organization"
+          to="/organization"
+          icon={<BusinessOutlinedIcon />}
+          selected={selected}
+          setSelected={setSelected}
+        />
         {/* <Item title="Tasks" to="/tasks" icon={<TaskOutlinedIcon />} selected={selected} setSelected={setSelected} /> */}
-        <Item title="Notes" to="/notes" icon={<DescriptionOutlinedIcon />} selected={selected} setSelected={setSelected} />
-        <Item title="Calendar" to="/calendar" icon={<CalendarTodayOutlinedIcon />} selected={selected} setSelected={setSelected} />
-        
-              <ListItem
-                    button
-                    onClick={handleLogout}
-                    sx={{
-                      color: colors.blueAccent[500],
-                      borderRadius: "10px",
-                      marginBottom: "8px",
+        <Item
+          title="Notes"
+          to="/notes"
+          icon={<DescriptionOutlinedIcon />}
+          selected={selected}
+          setSelected={setSelected}
+        />
+        <Item
+          title="Calendar"
+          to="/calendar"
+          icon={<CalendarTodayOutlinedIcon />}
+          selected={selected}
+          setSelected={setSelected}
+        />
 
-                    }}
-                  >
-                    <ListItemIcon sx={{ color: "inherit" }}>
-                      <LogoutOutlinedIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary="Logout"
-
-                      sx={{
-                        "& .MuiTypography-root": {
-                          fontWeight: "bold !important", // Ensure text is bold for selected item
-                          fontSize: "13px",
-                
-                        },
-                      }}
-                    />
-                  </ListItem>
+        <ListItem
+          button
+          onClick={handleLogout}
+          sx={{
+            color: colors.blueAccent[500],
+            borderRadius: "10px",
+            marginBottom: "8px",
+          }}
+        >
+          <ListItemIcon sx={{ color: "inherit" }}>
+            <LogoutOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="Logout"
+            sx={{
+              "& .MuiTypography-root": {
+                fontWeight: "bold !important", // Ensure text is bold for selected item
+                fontSize: "13px",
+              },
+            }}
+          />
+        </ListItem>
       </List>
     </Drawer>
   );

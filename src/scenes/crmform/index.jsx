@@ -222,7 +222,7 @@ const CrmForm = () => {
       ) {
         // Modal.success({ content: "CRM Registered Successfully!" });
         message.success("CRM Registered Successfully!");
-        Navigate("/crm");
+        Navigate("/admin/crm");
       } else {
         Modal.error({
           content: response.data?.error || "Error submitting form",

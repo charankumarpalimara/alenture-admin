@@ -246,11 +246,11 @@ const Cm = () => {
   // };
 
   const handleNewTicket = () => {
-    Navigate("/cmform");
+    Navigate("/admin/cmform");
   };
 
   const handleRowClick = (params) => {
-    Navigate("/cmdetails", { state: { ticket: params.row } });
+    Navigate("/admin/cmdetails", { state: { ticket: params.row } });
   };
 
   // Get Unique Values for Filters

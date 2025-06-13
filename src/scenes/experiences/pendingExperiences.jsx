@@ -202,7 +202,7 @@ const PendingExperiences = () => {
   ];
 
   const handleRowClick = (params) => {
-    Navigate("/ticketdetails", { state: { ticket: params.row } });
+    Navigate("/admin/ticketdetails", { state: { ticket: params.row } });
   };
 
   return (

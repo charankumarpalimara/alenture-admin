@@ -168,7 +168,7 @@ const Hob = () => {
   };
 
   const handleRowClick = (params) => {
-    Navigate("/hobdetails", { state: { ticket: params.row } });
+    Navigate("/admin/hobdetails", { state: { ticket: params.row } });
   };
 
   return (

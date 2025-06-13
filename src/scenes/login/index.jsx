@@ -51,7 +51,7 @@ const Login = ({ onLogin }) => {
         onLogin();
         sessionStorage.setItem("token", data.token); // Save the authentication token
         sessionStorage.setItem("userDetails", JSON.stringify(data.data)); // Save all user details in sessionStorage
-        navigate("/");
+        navigate("/admin");
       } else {
         setError(data.error || "Invalid credentials");
       }
