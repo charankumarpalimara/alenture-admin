@@ -23,6 +23,7 @@ const Login = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    console.log("api url", process.env.REACT_APP_API_URL);
 
     if (!email || !password) {
       setError("Please enter both email and password");
