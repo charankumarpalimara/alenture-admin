@@ -141,7 +141,7 @@ const Notes = () => {
         description: editDescription,
       };
       const res = await axios.put(
-        `${process.env.REACT_APP_API_URL}api/api/v1/UpdateNoteDetails/${editNote.id}`,
+        `${process.env.REACT_APP_API_URL}/v1/UpdateNoteDetails/${editNote.id}`,
         payload,
         {
           headers: { "Content-Type": "application/json" },
@@ -167,7 +167,7 @@ const Notes = () => {
     try {
       setIsLoading(true);
       const res = await axios.delete(
-        `${process.env.REACT_APP_API_URL}api/api/v1/NoteDelete/${editNote.id}`
+        `${process.env.REACT_APP_API_URL}/v1/NoteDelete/${editNote.id}`
       );
       if (res.status === 200) {
         message.success(res.data?.message || "Note deleted successfully");
