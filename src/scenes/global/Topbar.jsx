@@ -131,7 +131,7 @@ const Topbar = ({ onLogout }) => {
   // WebSocket connection for live notifications
   useEffect(() => {
     // Replace with your actual WebSocket server URL
-    const ws = new WebSocket("ws://localhost:8080"); // <-- adjust if needed
+    const ws = new WebSocket(process.env.REACT_APP_WS_URL);
 
     ws.onmessage = (event) => {
       try {
