@@ -185,50 +185,62 @@ function App() {
               <Route path="*" element={<Login onLogin={handleLogin} />} />
             ) : (
               <>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/allExperiences" element={<AllExperiences />} />
-                <Route path="/newExperiences" element={<NewExperiences />} />
+                <Route path="/admin" element={<Dashboard />} />
                 <Route
-                  path="/pendingExperiences"
+                  path="/admin/allExperiences"
+                  element={<AllExperiences />}
+                />
+                <Route
+                  path="/admin/newExperiences"
+                  element={<NewExperiences />}
+                />
+                <Route
+                  path="/admin/pendingExperiences"
                   element={<PendingExperiences />}
                 />
                 <Route
-                  path="/resolvedExperiences"
+                  path="/admin/resolvedExperiences"
                   element={<ResolvedExperiences />}
                 />
-                <Route path="/cm" element={<Cm />} />
-                <Route path="/crm" element={<Crm />} />
-                <Route path="/hob" element={<Hob />} />
-    
-                <Route path="/organization" element={<Organization />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/notes" element={<Notes />} />
-                <Route path="/form" element={<HobForm />} />
-                <Route path="/cmform" element={<CmForm />} />
-                <Route path="/crmform" element={<CrmForm />} />
-                <Route path="/bsuform" element={<BsuForm />} />
- 
+                <Route path="/admin/cm" element={<Cm />} />
+                <Route path="/admin/crm" element={<Crm />} />
+                <Route path="/admin/hob" element={<Hob />} />
+
+                <Route path="/admin/organization" element={<Organization />} />
+                <Route path="/admin/profile" element={<Profile />} />
+                <Route path="/admin/notes" element={<Notes />} />
+                <Route path="/admin/form" element={<HobForm />} />
+                <Route path="/admin/cmform" element={<CmForm />} />
+                <Route path="/admin/crmform" element={<CrmForm />} />
+                <Route path="/admin/bsuform" element={<BsuForm />} />
+
                 <Route
-                  path="/organizationform"
+                  path="/admin/organizationform"
                   element={<OrganizationForm />}
                 />
-                <Route path="/cmdetails" element={<CmDetails />} />
-                <Route path="/crmdetails" element={<CrmDetails />} />
+                <Route path="/admin/cmdetails" element={<CmDetails />} />
+                <Route path="/admin/crmdetails" element={<CrmDetails />} />
                 <Route
-                  path="/organizationdetails"
+                  path="/admin/organizationdetails"
                   element={<OrganizationDetails />}
                 />
-                <Route path="/organizationadd" element={<Organizationadd />} />
-                <Route path="/hobdetails" element={<HobDetails />} />
-                <Route path="/ticketdetails" element={<TicketDetails />} />
-                <Route path="/taskdetails" element={<TaskDetails />} />
+                <Route
+                  path="/admin/organizationadd"
+                  element={<Organizationadd />}
+                />
+                <Route path="/admin/hobdetails" element={<HobDetails />} />
+                <Route
+                  path="/admin/ticketdetails"
+                  element={<TicketDetails />}
+                />
+                <Route path="/admin/taskdetails" element={<TaskDetails />} />
                 {/* <Route path="/bar" element={<Bar />} /> */}
                 {/* <Route path="/pie" element={<Pie />} /> */}
-                <Route path="/line" element={<Line />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/calendar" element={<Calendar />} />
+                <Route path="/admin/line" element={<Line />} />
+                <Route path="/admin/faq" element={<FAQ />} />
+                <Route path="/admin/calendar" element={<Calendar />} />
                 {/* <Route path="/geography" element={<Geography />} /> */}
-                <Route path="*" element={<Navigate to="/" />} />
+                <Route path="*" element={<Navigate to="/admin" />} />
               </>
             )}
           </Routes>

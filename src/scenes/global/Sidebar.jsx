@@ -170,35 +170,35 @@ const Sidebar = ({ isSidebar, onLogout }) => {
       <List sx={{ padding: "20px" }}>
         <Item
           title="Dashboard"
-          to="/"
+          to="/admin"
           icon={<HomeOutlinedIcon />}
           selected={selected}
           setSelected={setSelected}
         />
         <Item
           title="Customer Manager"
-          to="/cm"
+          to="/admin/cm"
           icon={<PeopleAltOutlinedIcon />}
           selected={selected}
           setSelected={setSelected}
         />
         <Item
           title="Customer Relationship Manager"
-          to="/crm"
+          to="/admin/crm"
           icon={<HandshakeOutlinedIcon />}
           selected={selected}
           setSelected={setSelected}
         />
         <Item
           title="Head of the Business"
-          to="/hob"
+          to="/admin/hob"
           icon={<StorefrontOutlinedIcon />}
           selected={selected}
           setSelected={setSelected}
         />
         <Item
           title="Organization"
-          to="/organization"
+          to="/admin/organization"
           icon={<BusinessOutlinedIcon />}
           selected={selected}
           setSelected={setSelected}
@@ -206,14 +206,14 @@ const Sidebar = ({ isSidebar, onLogout }) => {
         {/* <Item title="Tasks" to="/tasks" icon={<TaskOutlinedIcon />} selected={selected} setSelected={setSelected} /> */}
         <Item
           title="Notes"
-          to="/notes"
+          to="/admin/notes"
           icon={<DescriptionOutlinedIcon />}
           selected={selected}
           setSelected={setSelected}
         />
         <Item
           title="Calendar"
-          to="/calendar"
+          to="/admin/calendar"
           icon={<CalendarTodayOutlinedIcon />}
           selected={selected}
           setSelected={setSelected}
