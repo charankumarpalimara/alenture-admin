@@ -159,7 +159,7 @@ const HobForm = () => {
 
     try {
       const response = await axios.post(
-        `${ProcessingInstruction.env.REACT_APP_API_URL}/api/v1/createHob`,
+        `${ProcessingInstruction.env.REACT_APP_API_URL}/v1/createHob`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
