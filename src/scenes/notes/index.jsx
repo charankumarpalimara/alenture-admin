@@ -66,10 +66,10 @@ const Notes = () => {
     try {
       const sessionData = JSON.parse(sessionStorage.getItem("userDetails"));
       const createrid =
-        sessionData?.adminid || sessionData?.crmid || sessionData?.hobid || "";
+        sessionData?.adminid || "";
       // const userId = sessionStorage.getItem("adminid");
       const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}api/v1/noteGetByid/${createrid}`
+        `${process.env.REACT_APP_API_URL}/v1/noteGetByid/${createrid}`
       );
       setNotes(res.data.notes || []);
     } catch (err) {
@@ -97,7 +97,7 @@ const Notes = () => {
       setIsLoading(true);
       const sessionData = JSON.parse(sessionStorage.getItem("userDetails"));
       const createrid =
-        sessionData?.adminid || sessionData?.crmid || sessionData?.hobid || "";
+        sessionData?.adminid || "";
       const createrrole = sessionData?.extraind10 || "";
 
       const payload = {
@@ -108,7 +108,7 @@ const Notes = () => {
       };
 
       const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}api/v1/createNote`,
+        `${process.env.REACT_APP_API_URL}/v1/createNote`,
         payload,
         {
           headers: { "Content-Type": "application/json" },
