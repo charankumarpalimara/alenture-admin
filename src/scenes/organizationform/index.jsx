@@ -66,7 +66,7 @@ const OrganizationForm = () => {
         const orgs =
           response.data?.data?.map((o) => o.organizationname?.toLowerCase()) ||
           [];
-          Navigate("/organization");
+        // Navigate("/admin/organization");
         setExistingOrgs(orgs);
       } catch (error) {
         console.error("Error fetching organizations:", error);
@@ -99,7 +99,7 @@ const OrganizationForm = () => {
         formData.append("createrid", createrid);
         formData.append("createrrole", createrrole);
         await axios.post(
-          `${process.env.REACT_APP_API_URL}api/api/v1/createOrganization`,
+          `${process.env.REACT_APP_API_URL}/v1/createOrganization`,
           formData,
           {
             headers: { "Content-Type": "multipart/form-data" },
@@ -125,7 +125,7 @@ const OrganizationForm = () => {
           passwords: "",
         },
       ]);
-      // Navigate('/organization');
+      Navigate("/admin/organization");
     } catch (error) {
       console.error("Error submitting form data:", error);
     } finally {

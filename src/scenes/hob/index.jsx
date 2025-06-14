@@ -164,7 +164,7 @@ const Hob = () => {
   }, []);
 
   const handleNewTicket = () => {
-    Navigate("/form");
+    Navigate("/admin/form");
   };
 
   const handleRowClick = (params) => {

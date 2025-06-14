@@ -213,7 +213,6 @@ function App() {
                 <Route path="/admin/cmform" element={<CmForm />} />
                 <Route path="/admin/crmform" element={<CrmForm />} />
                 <Route path="/admin/bsuform" element={<BsuForm />} />
-
                 <Route
                   path="/admin/organizationform"
                   element={<OrganizationForm />}

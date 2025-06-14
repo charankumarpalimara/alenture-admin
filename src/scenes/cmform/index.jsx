@@ -55,7 +55,7 @@ const CmForm = () => {
     const fetchTickets = async () => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_URL}api/v1/getAllOrgs`
+          `${process.env.REACT_APP_API_URL}/v1/getAllOrgs`
         );
         const data = await response.json();
         if (response.ok && Array.isArray(data.data)) {
@@ -93,9 +93,7 @@ const CmForm = () => {
   useEffect(() => {
     // if (!isEditing) return;
     if (crmidValue) {
-      fetch(
-        `${process.env.REACT_APP_API_URL}/v1/getCrmNamebyId/${crmidValue}`
-      )
+      fetch(`${process.env.REACT_APP_API_URL}/v1/getCrmNamebyId/${crmidValue}`)
         .then((res) => res.json())
         .then((data) => {
           setCrmName(data.crmNames || "");

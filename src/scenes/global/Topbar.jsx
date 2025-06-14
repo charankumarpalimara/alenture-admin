@@ -61,7 +61,7 @@ const getActivePage = (pathname) => {
     pathname.includes("/pendingExperiences") ||
     pathname.includes("/resolvedExperiences")
   ) {
-    return "/"; // Dashboard is active for these routes
+    return "/admin"; // Dashboard is active for these routes
   } else {
     return pathname;
   }
@@ -158,7 +158,7 @@ const Topbar = ({ onLogout }) => {
 
   const getPageTitle = () => {
     switch (location.pathname) {
-      case "/":
+      case "/admin":
         return "Dashboard";
       case "/cm":
         return "Customer Manager";
@@ -212,80 +212,82 @@ const Topbar = ({ onLogout }) => {
   };
   const getPageTitle1 = () => {
     switch (location.pathname) {
-      case "/":
+      case "/admin":
         return { primaryTitle: "Dashboard", secondaryTitle: null };
-      case "/cm":
+      case "/admin/cm":
         return { primaryTitle: "Customer Manager", secondaryTitle: null };
-      case "/crm":
+      case "/admin/crm":
         return {
           primaryTitle: "Customer Relationship Manager",
           secondaryTitle: null,
         };
-      case "/cmdetails":
+      case "/admin/cmdetails":
         return {
           primaryTitle: "Customer Manager Details ",
           secondaryTitle: null,
         };
-      case "/organization":
+      case "/admin/organization":
         return { primaryTitle: "Organization", secondaryTitle: null };
-      case "/ticketdetails":
+      case "/admin/ticketdetails":
         return { primaryTitle: "Experience Details", secondaryTitle: null };
-      case "/organizationdetails":
+      case "/admin/organizationdetails":
         return { primaryTitle: "Organizations Details", secondaryTitle: null };
-      case "/organizationform":
+      case "/admin/organizationadd":
+        return { primaryTitle: "Organizations Add", secondaryTitle: null };
+      case "/admin/organizationform":
         return {
           primaryTitle: "Organization",
           secondaryTitle: "Create a New Organization",
         };
-      case "/cmform":
+      case "/admin/cmform":
         return {
           primaryTitle: "Customer Manager",
           secondaryTitle: "Create a New Customer Manager",
         };
-      case "/crmdetails":
+      case "/admin/crmdetails":
         return {
           primaryTitle: "Customer Relationship Manager Details ",
           secondaryTitle: null,
         };
-      case "/crmform":
+      case "/admin/crmform":
         return {
           primaryTitle: "Customer Relationship Manager",
           secondaryTitle: "Create a New Customer Relationship Manager",
         };
-      case "/hob":
+      case "/admin/hob":
         return { primaryTitle: "Head of the Business", secondaryTitle: null };
-      case "/tasks":
+      case "/admin/tasks":
         return { primaryTitle: "Tasks List", secondaryTitle: null };
-      case "/taskform":
+      case "/admin/taskform":
         return {
           primaryTitle: "Tasks List",
           secondaryTitle: "Create a New Task",
         };
-      case "/taskdetails":
+      case "/admin/taskdetails":
         return { primaryTitle: "Task Details", secondaryTitle: null };
-      case "/form":
+      case "/admin/form":
         return {
           primaryTitle: "Head of the Business",
           secondaryTitle: "Create a New Head of the Business Unit",
         };
-      case "/hobdetails":
+      case "/admin/hobdetails":
         return {
           primaryTitle: "Head of The Business Details",
           secondaryTitle: null,
         };
-      case "/allExperiences":
+      case "/admin/allExperiences":
         return { primaryTitle: "All Experiences", secondaryTitle: null };
-      case "/newExperiences":
+      case "/admin/newExperiences":
         return { primaryTitle: "New Experiences", secondaryTitle: null };
-      case "/pendingExperiences":
+      case "/admin/pendingExperiences":
         return { primaryTitle: "Pending Experiences", secondaryTitle: null };
-      case "/resolvedExperiences":
+      case "/admin/resolvedExperiences":
         return { primaryTitle: "Resolved Experiences", secondaryTitle: null };
-      case "/profile":
+      case "/admin/profile":
         return { primaryTitle: "Profile", secondaryTitle: null };
-      case "/notes":
+      case "/admin/notes":
         return { primaryTitle: "Notes", secondaryTitle: null };
-      case "/calendar":
+      case "/admin/calendar":
         return { primaryTitle: "Calendar", secondaryTitle: null };
       default:
         return { primaryTitle: "Page Not Found", secondaryTitle: null };
