@@ -60,7 +60,7 @@ const OrganizationForm = () => {
     const getallOrganizations = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}api/v1/getAllOrgs`
+          `${process.env.REACT_APP_API_URL}/v1/getAllOrgs`
         );
         // If your API returns { data: [{ organizationname: "..." }, ...] }
         const orgs =
