@@ -37,29 +37,38 @@ import Alert from "@mui/material/Alert";
 
 // Shared getActivePage function
 const getActivePage = (pathname) => {
-  if (pathname.includes("/crm") || pathname.includes("/crmform")) {
-    return "/crm";
-  } else if (pathname.includes("/cm") || pathname.includes("/cmform")) {
-    return "/cm";
-  } else if (pathname.includes("/hob") || pathname.includes("/form")) {
-    return "/hob";
-  } else if (pathname.includes("/notes")) {
-    return "/notes";
-  } else if (pathname.includes("/calendar")) {
-    return "/calendar";
-  } else if (pathname.includes("/tasks") || pathname.includes("/taskform")) {
-    return "/tasks";
-  } else if (pathname.includes("/organization")) {
-    return "/organization";
+  if (pathname.includes("/admin/crm") || pathname.includes("/admin/crmform")) {
+    return "/admin/crm";
   } else if (
-    pathname === "/" ||
-    pathname.includes("/ticketdetails") ||
-    pathname.includes("/allExperiences") ||
-    pathname.includes("/newExperiences") ||
-    pathname.includes("/profile") ||
-    pathname.includes("/taskdetails") ||
-    pathname.includes("/pendingExperiences") ||
-    pathname.includes("/resolvedExperiences")
+    pathname.includes("/admin/cm") ||
+    pathname.includes("/admin/cmform")
+  ) {
+    return "/admin/cm";
+  } else if (
+    pathname.includes("/admin/hob") ||
+    pathname.includes("/admin/form")
+  ) {
+    return "/admin/hob";
+  } else if (pathname.includes("/admin/notes")) {
+    return "/admin/notes";
+  } else if (pathname.includes("/admin/calendar")) {
+    return "/admin/calendar";
+  } else if (
+    pathname.includes("/admin/tasks") ||
+    pathname.includes("/admin/taskform")
+  ) {
+    return "/admin/tasks";
+  } else if (pathname.includes("/admin/organization")) {
+    return "/admin/organization";
+  } else if (
+    pathname === "/admin" ||
+    pathname.includes("/admin/ticketdetails") ||
+    pathname.includes("/admin/allExperiences") ||
+    pathname.includes("/admin/newExperiences") ||
+    pathname.includes("/admin/profile") ||
+    pathname.includes("/admin/taskdetails") ||
+    pathname.includes("/admin/pendingExperiences") ||
+    pathname.includes("/admin/resolvedExperiences")
   ) {
     return "/admin"; // Dashboard is active for these routes
   } else {
@@ -160,51 +169,51 @@ const Topbar = ({ onLogout }) => {
     switch (location.pathname) {
       case "/admin":
         return "Dashboard";
-      case "/cm":
+      case "/admin/cm":
         return "Customer Manager";
-      case "/crm":
+      case "/admin/crm":
         return "Customer Relationship Manager";
-      case "/cmform":
+      case "/admin/cmform":
         return "Create a New Customer Manager";
-      case "/crmform":
+      case "/admin/crmform":
         return " Create a New Customer Relationship Manager";
-      case "/hob":
+      case "/admin/hob":
         return "Head of the Business";
-      case "/tasks":
+      case "/admin/tasks":
         return "Tasks List";
-      case "/taskdetails":
+      case "/admin/taskdetails":
         return "Task Details";
-      case "/taskform":
+      case "/admin/taskform":
         return "Create New Task";
-      case "/crmdetails":
+      case "/admin/crmdetails":
         return "Customer Relationship Manager Details";
-      case "/cmdetails":
+      case "/admin/cmdetails":
         return "Customer Manager Details";
-      case "/organizationdetails":
+      case "/admin/organizationdetails":
         return " Organization Details";
-      case "/organizationform":
+      case "/admin/organizationform":
         return "Create a New Organization";
-      case "/ticketdetails":
+      case "/admin/ticketdetails":
         return " Experience Details";
-      case "/form":
+      case "/admin/form":
         return "Create a New Organization";
-      case "/hobdetails":
+      case "/admin/hobdetails":
         return "Head of The Department Details";
-      case "/allExperiences":
+      case "/admin/allExperiences":
         return "All Experiences";
-      case "/organization":
+      case "/admin/organization":
         return "Organizations";
-      case "/newExperiences":
+      case "/admin/newExperiences":
         return "New Experiences";
-      case "/pendingExperiences":
+      case "/admin/pendingExperiences":
         return "Pending Experiences";
-      case "/resolvedExperiences":
+      case "/admin/resolvedExperiences":
         return "Resolved Experiences";
-      case "/profile":
+      case "/admin/profile":
         return "Profile";
-      case "/notes":
+      case "/admin/notes":
         return "Notes";
-      case "/calendar":
+      case "/admin/calendar":
         return "Calendar";
       default:
         return "Page Not Found";
@@ -840,7 +849,7 @@ const Topbar = ({ onLogout }) => {
           >
             <Item
               title="Dashboard"
-              to="/"
+              to="/admin"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -848,7 +857,7 @@ const Topbar = ({ onLogout }) => {
             />
             <Item
               title="Customer Manager"
-              to="/cm"
+              to="/admin/cm"
               icon={<PeopleAltOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -856,7 +865,7 @@ const Topbar = ({ onLogout }) => {
             />
             <Item
               title="Customer Relationship Manager"
-              to="/crm"
+              to="/admin/crm"
               icon={<HandshakeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -864,7 +873,7 @@ const Topbar = ({ onLogout }) => {
             />
             <Item
               title="Head of the Business"
-              to="/hob"
+              to="/admin/hob"
               icon={<StorefrontOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -872,7 +881,7 @@ const Topbar = ({ onLogout }) => {
             />
             <Item
               title="Organization"
-              to="/organization"
+              to="/admin/organization"
               icon={<BusinessOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -881,7 +890,7 @@ const Topbar = ({ onLogout }) => {
             {/* <Item title="Tasks" to="/tasks" icon={<TaskOutlinedIcon />} selected={selected} setSelected={setSelected} handleClose={() => setIsModalOpen(false)} /> */}
             <Item
               title="Notes"
-              to="/notes"
+              to="/admin/notes"
               icon={<DescriptionOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -889,7 +898,7 @@ const Topbar = ({ onLogout }) => {
             />
             <Item
               title="Calendar"
-              to="/calendar"
+              to="/admin/calendar"
               icon={<CalendarTodayOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

@@ -26,45 +26,48 @@ import logoLight from "./logo.png";
 // Shared getActivePage function
 const getActivePage = (pathname) => {
   if (
-    pathname.includes("/crm") ||
-    pathname.includes("/crmform") ||
-    pathname.includes("/crmdetails")
+    pathname.includes("/admin/crm") ||
+    pathname.includes("/admin/crmform") ||
+    pathname.includes("/admin/crmdetails")
   ) {
-    return "/crm";
+    return "/admin/crm";
   } else if (
-    pathname.includes("/cm") ||
-    pathname.includes("/cmform") ||
-    pathname.includes("/cmdetails")
+    pathname.includes("/admin/cm") ||
+    pathname.includes("/admin/cmform") ||
+    pathname.includes("/admin/cmdetails")
   ) {
-    return "/cm";
+    return "/admin/cm";
   } else if (
-    pathname.includes("/hob") ||
-    pathname.includes("/form") ||
-    pathname.includes("/hobdetails")
+    pathname.includes("/admin/hob") ||
+    pathname.includes("/admin/form") ||
+    pathname.includes("/admin/hobdetails")
   ) {
-    return "/hob";
-  } else if (pathname.includes("/notes")) {
-    return "/notes";
-  } else if (pathname.includes("/tasks") || pathname.includes("/taskform")) {
-    return "/tasks";
-  } else if (pathname.includes("/calendar")) {
-    return "/calendar";
+    return "/admin/hob";
+  } else if (pathname.includes("/admin/notes")) {
+    return "/admin/notes";
   } else if (
-    pathname.includes("/organization") ||
-    pathname.includes("/organizationdetails")
+    pathname.includes("/admin/tasks") ||
+    pathname.includes("/admin/taskform")
   ) {
-    return "/organization";
+    return "/admin/tasks";
+  } else if (pathname.includes("/admin/calendar")) {
+    return "/admin/calendar";
   } else if (
-    pathname === "/" ||
-    pathname.includes("/allExperiences") ||
-    pathname.includes("/ticketdetails") ||
-    pathname.includes("/newExperiences") ||
-    pathname.includes("/pendingExperiences") ||
-    pathname.includes("/taskdetails") ||
-    pathname.includes("/profile") ||
-    pathname.includes("/resolvedExperiences")
+    pathname.includes("/admin/organization") ||
+    pathname.includes("/admin/organizationdetails")
   ) {
-    return "/"; // Dashboard is active for these routes
+    return "/admin/organization";
+  } else if (
+    pathname === "/admin" ||
+    pathname.includes("/admin/allExperiences") ||
+    pathname.includes("/admin/ticketdetails") ||
+    pathname.includes("/admin/newExperiences") ||
+    pathname.includes("/admin/pendingExperiences") ||
+    pathname.includes("/admin/taskdetails") ||
+    pathname.includes("/admin/profile") ||
+    pathname.includes("/admin/resolvedExperiences")
+  ) {
+    return "/admin"; // Dashboard is active for these routes
   } else {
     return pathname;
   }
