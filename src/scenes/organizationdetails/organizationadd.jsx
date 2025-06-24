@@ -13,6 +13,7 @@ import { Country, State, City } from "country-state-city";
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Spin } from 'antd';
 
 const { Text } = Typography;
 
@@ -158,7 +159,7 @@ const handleFormSubmit = async () => {
             fontSize: "20px",
           }}
         >
-          <p>Loading... Please wait while we process your request.</p>
+           <Spin size="large" fullscreen />
         </div>
       )}
       <Box m="15px" sx={{ backgroundColor: "#ffffff", padding: "20px" }}>
@@ -174,7 +175,7 @@ const handleFormSubmit = async () => {
               }}
             >
               <Row gutter={16}>
-                <Col xs={24} md={8}>
+                <Col xs={24} md={8} style={{ display: "none" }}>
                   <Form.Item label="Organization Id">
                     <Input
                       value={organizationid || ""}
