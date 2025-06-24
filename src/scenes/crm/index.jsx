@@ -77,6 +77,7 @@ const Crm = () => {
   const [originalTickets, setOriginalTickets] = useState([]); // State to store the original data
   const [filteredTickets, setFilteredTickets] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("Active");
 
   // Search filter
   const handleSearchChange = (event) => {
@@ -124,7 +125,11 @@ const Crm = () => {
             imageUrl: `${item.imageUrl || ""}`,
           }));
           setOriginalTickets(transformedData);
-          setFilteredTickets(transformedData);
+          setFilteredTickets(
+            transformedData.filter(
+              (item) => (item.status || "").toLowerCase() === "active"
+            )
+          );
         }
       } catch (error) {
         console.error("Error fetching tickets:", error);
@@ -182,6 +187,18 @@ const Crm = () => {
     Navigate("/admin/crmdetails", { state: { ticket: params.row } });
   };
 
+  const handleStatusFilter = (status) => {
+    setStatusFilter(status);
+    setFilteredTickets(
+      originalTickets.filter((item) =>
+        status === "Active"
+          ? (item.status || "").toLowerCase() === "active"
+          : (item.status || "").toLowerCase() === "suspend"
+      )
+    );
+  };
+
+
   return (
     <Box m="10px">
       {/* Toolbar */}
@@ -226,9 +243,68 @@ const Crm = () => {
           Create New
         </Button>
       </Box>
-      <Box>
-        <Button>Active</Button>
-        <Button>Suspended</Button>
+      <Box
+        sx={{
+          display: "flex",
+          gap: "10px",
+          mb: "10px",
+          justifyContent: "center",
+          alignItems: "center",
+          // boxShadow: "0 2px 8px rgba(62,67,150,0.10)",
+          borderRadius: "12px",
+          // p: "10px",
+          // background: "#f6f8ff",
+          // border: "1px solid #e3e8ff",
+        }}
+      >
+        <Button
+          variant={statusFilter === "Active" ? "contained" : "outlined"}
+          onClick={() => handleStatusFilter("Active")}
+          sx={{
+            backgroundColor:
+              statusFilter === "Active"
+                ? colors.blueAccent[500]
+                : "#e3e8ff",
+            color:
+              statusFilter === "Active"
+                ? "#ffffff"
+                : colors.blueAccent[500],
+            borderRadius: "8px",
+            boxShadow:
+              statusFilter === "Active"
+                ? "0 2px 8px rgba(62,67,150,0.10)"
+                : "none",
+            border: "1px solid #b3c6ff",
+            fontWeight: "bold",
+            minWidth: 120,
+          }}
+        >
+          Active
+        </Button>
+        <Button
+          variant={statusFilter === "Suspend" ? "contained" : "outlined"}
+          onClick={() => handleStatusFilter("Suspend")}
+          sx={{
+            backgroundColor:
+              statusFilter === "Suspend"
+                ? colors.blueAccent[500]
+                : "#e3e8ff",
+            color:
+              statusFilter === "Suspend"
+                ? "#ffffff"
+                : colors.blueAccent[500],
+            borderRadius: "8px",
+            boxShadow:
+              statusFilter === "Suspend"
+                ? "0 2px 8px rgba(62,67,150,0.10)"
+                : "none",
+            border: "1px solid #b3c6ff",
+            fontWeight: "bold",
+            minWidth: 120,
+          }}
+        >
+          Suspend
+        </Button>
       </Box>
 
       {/* DataGrid */}

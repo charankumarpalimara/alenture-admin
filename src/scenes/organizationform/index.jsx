@@ -212,12 +212,12 @@ const OrganizationForm = () => {
                     />
                   </Form.Item>
                 </Col>
-                {/* <Col xs={24} md={8}>
+                 <Col xs={24} md={8}>
                   <Form.Item
-                    label="Branch Name"
+                    label="Organization Unit"
                     name={[index, "branch"]}
                     rules={[
-                      { required: true, message: "Branch Name is required" },
+                      { required: true, message: "Organization Unit is required" },
                     ]}
                   >
                     <Input
@@ -227,7 +227,7 @@ const OrganizationForm = () => {
                         updated[index].branch = e.target.value;
                         setBranchInstances(updated);
                       }}
-                      placeholder="Branch Name"
+                      placeholder="Organization Unit"
                       size="large"
                       style={{
                         borderRadius: 8,
@@ -236,7 +236,7 @@ const OrganizationForm = () => {
                       }}
                     />
                   </Form.Item>
-                </Col> */}
+                </Col> 
 
                 <Col xs={24} md={8}>
                   <Form.Item label={<b>Phone Number</b>} required>

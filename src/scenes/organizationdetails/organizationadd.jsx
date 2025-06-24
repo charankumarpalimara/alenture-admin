@@ -209,10 +209,10 @@ const handleFormSubmit = async () => {
                 </Col>
                 <Col xs={24} md={8}>
                   <Form.Item
-                    label="Branch Name"
+                    label="Organization Unit"
                     name={[index, "branch"]}
                     rules={[
-                      { required: true, message: "Branch Name is required" },
+                      { required: true, message: "Organization Unit is required" },
                     ]}
                   >
                     <Input
