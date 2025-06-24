@@ -235,7 +235,7 @@ const CmForm = () => {
       );
       // Modal.success({ content: "CM Registered Successfully!" });
       message.success("CM Registered Successfully!");
-      Navigate("/hob/cm"); // Redirect to CM List page
+      Navigate("/admin/cm"); // Redirect to CM List page
 
       form.resetFields();
       setProfileImage(null);
