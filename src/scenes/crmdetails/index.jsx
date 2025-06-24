@@ -22,7 +22,7 @@ import { Country, State } from "country-state-city";
 import { useLocation } from "react-router-dom";
 
 const { Text } = Typography;
-const { Option } = Select;
+// const { Option } = Select;
 
 function centerAspectCrop(mediaWidth, mediaHeight, aspect) {
   const cropWidth = mediaWidth * 0.9;
@@ -204,12 +204,12 @@ const CrmDetails = () => {
         u8arr[n] = bstr.charCodeAt(n);
       }
       const file = new Blob([u8arr], { type: mime });
-      formData.append("crmProfileImageBySelf", file, "profile.jpg");
+      formData.append("crmProfileByAdminAndHob", file, "profile.jpg");
     }
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/v1/UpdatecrmProfileDetailsByitsSelf`,
-        // "http://127.0.0.1:8080/v1/UpdatecrmProfileDetailsByitsSelf",
+        `${process.env.REACT_APP_API_URL}/v1/UpdatecrmProfileByAdminAndHob`,
+        // "http://127.0.0.1:8080/v1/UpdatecrmProfileByAdminAndHob",
         {
           method: "POST",
           body: formData,
@@ -275,8 +275,8 @@ const CrmDetails = () => {
   const fetchCmNames = async (orgName, branch) => {
     try {
       const response = await fetch(
-        // `${process.env.REACT_APP_API_URL}/v1/GetCmNames`,
-        "http://127.0.0.1:8080/v1/GetCmNames",
+        `${process.env.REACT_APP_API_URL}/v1/GetCmNames`,
+        // "http://127.0.0.1:8080/v1/GetCmNames",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -329,7 +329,7 @@ const CrmDetails = () => {
         formData.append(key, value);
       });
 
-      const response = await fetch("http://127.0.0.1:8080/v1/createRelation", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}}/v1/createRelation`, {
         method: "POST",
         body: formData,
       });
@@ -965,13 +965,13 @@ const CrmDetails = () => {
               </Col>
               <Col xs={24} md={8}>
                 <Form.Item
-                  label={<Text strong>Branch</Text>}
+                  label={<Text strong>Organization Unit</Text>}
                   name="branch"
-                  rules={[{ required: true, message: "Branch is required" }]}
+                  rules={[{ required: true, message: " Organization Unit is required" }]}
                 >
                   <Select
                     showSearch
-                    placeholder="Select Branch"
+                    placeholder="Select Organization Unit"
                     size="large"
                     style={{ borderRadius: 8, background: "#fff", fontSize: 16 }}
                     onChange={async (value) => {

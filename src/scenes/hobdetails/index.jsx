@@ -4,7 +4,7 @@ import { CameraOutlined } from '@ant-design/icons';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import { Country, State } from 'country-state-city';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 // import {  } from "react-router-dom";
 
 const { Text } = Typography;
@@ -36,7 +36,7 @@ const HobDetails = () => {
   const imgRef = useRef(null);
   const fileInputRef = useRef(null);
   const location = useLocation();
-  const Navigate = useNavigate();
+  // const Navigate = useNavigate();
   const [form] = Form.useForm();
 
   // Use localTicket state for all ticket data

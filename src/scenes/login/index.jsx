@@ -10,7 +10,7 @@ import {
   useTheme,
 } from "@mui/material";
 // import { useNavigate } from "react-router-dom";
-import { Row, Col, Form, Input, message, Card } from "antd";
+import { Form, Input, message} from "antd";
 import Logo from "./logo.png";
 
 
@@ -20,14 +20,14 @@ const Login = ({ onLogin }) => {
     const [form] = Form.useForm();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
   // const navigate = useNavigate();
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (values) => {
-    setLoading(true);
+    // setLoading(true);
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/v1/adminLogin`,
@@ -49,7 +49,7 @@ const Login = ({ onLogin }) => {
     } catch (error) {
       message.error("Something went wrong. Please try again later.");
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
 

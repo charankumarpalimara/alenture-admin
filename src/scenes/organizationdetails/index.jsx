@@ -421,7 +421,7 @@ const OrganizationDetails = () => {
             fontWeight: "bold",
           }}
         >
-        Add New Unit
+        Add Oranization Unit
         </Button>
       </Box>
     </>

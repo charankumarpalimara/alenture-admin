@@ -1,9 +1,11 @@
 import { Box } from "@mui/material";
-import { Form, Input, Button, Row, Col, Select, message, Spin } from "antd";
+import { Form, Input, Button, Row, Col, Select, message, Spin, Modal } from "antd";
 import { Country, State, City } from "country-state-city";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
+const { Option } = Select;
 
 const OrganizationForm = () => {
   const [form] = Form.useForm();
@@ -12,6 +14,8 @@ const OrganizationForm = () => {
   const countries = Country.getAllCountries();
   // const [selectedCountry, setSelectedCountry] = useState("");
   // const [selectedState, setSelectedState] = useState("");
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [editValues, setEditValues] = useState({});
   const [existingOrgs, setExistingOrgs] = useState([]);
   const [branchInstances, setBranchInstances] = useState([
     {
@@ -158,8 +162,106 @@ const OrganizationForm = () => {
               </div> */}
         </div>
       )}
+
+            <Modal
+        open={showEditModal}
+        title="Review & Edit ORGANIZATION Details"
+        onCancel={() => setShowEditModal(false)}
+        onOk={() => handleFormSubmit(editValues)} // Pass the edited values to submit
+        okText="Update"
+        cancelText="Cancel"
+        confirmLoading={isLoading}
+        width={900}
+        // height={600}
+        okButtonProps={{
+          style: {
+            background: "#3e4396",
+            borderColor: "#3e4396",
+            color: "#fff",
+            fontWeight: "bold",
+          },
+        }}
+      >
+        <Form
+          layout="vertical"
+          initialValues={editValues}
+          onValuesChange={(_, allValues) => setEditValues(allValues)}
+        >
+          <Row gutter={24}>
+
+            <Col xs={24} md={8}>
+              <Form.Item label="Organization Name" name="organization" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+
+            <Col xs={24} md={8}>
+              <Form.Item label="Organization Unit" name="branch" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+
+            <Col xs={24} md={8}>
+              <Form.Item label="Email" name="email" rules={[{ required: true, type: "email" }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+
+            </Row>
+                    <Row gutter={24}>
+            <Col xs={24} md={8}>
+              <Form.Item label="Phone Code" name="phoneCode" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+
+            <Col xs={24} md={8}>
+              <Form.Item label="Phone Number" name="phoneno" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+
+         <Col xs={24} md={8}>
+              <Form.Item label="Country" name="country" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+
+            </Row>
+ 
+        <Row gutter={24}>
+
+   
+            <Col xs={24} md={8}>
+              <Form.Item label="State" name="province" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+
+            <Col xs={24} md={8}>
+              <Form.Item label="City" name="city" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+
+            <Col xs={24} md={8}>
+              <Form.Item label="Postal Code" name="postcode" rules={[{ required: true }]}>
+                <Input />
+              </Form.Item>
+            </Col>
+            </Row>
+
+        </Form>
+      </Modal>
+
+
       <Box m="15px" sx={{ backgroundColor: "#ffffff", padding: "20px" }}>
-        <Form form={form} layout="vertical" onFinish={handleFormSubmit}>
+        <Form form={form} 
+        layout="vertical"     
+          onFinish={() => {
+          setEditValues(branchInstances[0]);
+          setShowEditModal(true);
+        }}>
           {branchInstances.map((branch, index) => (
             <Box
               key={index}

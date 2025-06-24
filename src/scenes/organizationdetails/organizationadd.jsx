@@ -94,7 +94,7 @@ const handleFormSubmit = async () => {
       };
       try {
         await axios.post(
-          `http://127.0.0.1:8080/v1/organizationAdding`,
+          `${process.env.REACT_APP_API_URL}/v1/organizationAdding`,
           payload,
           {
             headers: { "Content-Type": "application/json" },
@@ -488,7 +488,7 @@ const handleFormSubmit = async () => {
               onClick={handleAddBranch}
               style={{ padding: "8px 16px", borderRadius: 8, fontWeight: 600 }}
             >
-              + Add Branch
+              + Add Organization Unit
             </Button>
             <Button
               type="primary"

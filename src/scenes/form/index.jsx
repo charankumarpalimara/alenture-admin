@@ -49,6 +49,8 @@ const HobForm = () => {
   const [completedCrop, setCompletedCrop] = useState();
   const imgRef = useRef(null);
   const fileInputRef = useRef(null);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [editValues, setEditValues] = useState({});
 
   const countries = Country.getAllCountries();
 
@@ -136,7 +138,7 @@ const HobForm = () => {
     formData.append("phonecode", values.phoneCode || "");
     formData.append("mobile", values.PhoneNo || "");
     formData.append("username", values.email || "");
-    formData.append("passwords", values.firstName + " " + values.email);
+    formData.append("passwords", values.firstName + values.PhoneNo);
 
     if (profileImage) {
       try {
@@ -155,7 +157,7 @@ const HobForm = () => {
 
     try {
       const response = await axios.post(
-        `${ProcessingInstruction.env.REACT_APP_API_URL}/v1/createHob`,
+        `${process.env.REACT_APP_API_URL}/v1/createHob`,
         // `http://127.0.0.1:8080/v1/createHob`,
         formData,
         {
@@ -212,13 +214,110 @@ const HobForm = () => {
               </div> */}
         </div>
       )}
+
+            <Modal
+              open={showEditModal}
+              title="Review & Edit HOB Details"
+              onCancel={() => setShowEditModal(false)}
+              onOk={() => handleFormSubmit(editValues)} // Pass the edited values to submit
+              okText="Update"
+              cancelText="Cancel"
+              confirmLoading={isLoading}
+              width={900}
+              okButtonProps={{
+                style: {
+                  background: "#3e4396",
+                  borderColor: "#3e4396",
+                  color: "#fff",
+                  fontWeight: "bold",
+                },
+              }}
+            >
+              <Form
+                layout="vertical"
+                initialValues={editValues}
+                onValuesChange={(_, allValues) => setEditValues(allValues)}
+              >
+                <Row gutter={24}>
+      
+                  <Col xs={24} md={8}>
+                    <Form.Item label="First Name" name="firstName" rules={[{ required: true }]}>
+                      <Input />
+                    </Form.Item>
+                  </Col>
+      
+                  <Col xs={24} md={8}>
+                    <Form.Item label="Last Name" name="lastName" rules={[{ required: true }]}>
+                      <Input />
+                    </Form.Item>
+                  </Col>
+      
+                  <Col xs={24} md={8}>
+                    <Form.Item label="Email" name="email" rules={[{ required: true, type: "email" }]}>
+                      <Input />
+                    </Form.Item>
+                  </Col>
+      
+                </Row>
+      
+                <Row gutter={24}>
+                  <Col xs={24} md={8}>
+                    <Form.Item label="Phone Code" name="phoneCode" rules={[{ required: true }]}>
+                      <Input />
+                    </Form.Item>
+                  </Col>
+      
+                  <Col xs={24} md={8}>
+                    <Form.Item label="Phone Number" name="PhoneNo" rules={[{ required: true }]}>
+                      <Input />
+                    </Form.Item>
+                  </Col>
+      
+                  <Col xs={24} md={8}>
+                    <Form.Item label="Gender" name="gender" rules={[{ required: true }]}>
+                      <Select>
+                        <Option value="Male">Male</Option>
+                        <Option value="Female">Female</Option>
+                      </Select>
+                    </Form.Item>
+                  </Col>
+      
+                </Row>
+                <Row gutter={24}>
+      
+                  <Col xs={24} md={8}>
+                    <Form.Item label="Country" name="country" rules={[{ required: true }]}>
+                      <Input />
+                    </Form.Item>
+                  </Col>
+      
+                  <Col xs={24} md={8}>
+                    <Form.Item label="State" name="state" rules={[{ required: true }]}>
+                      <Input />
+                    </Form.Item>
+                  </Col>
+      
+                  <Col xs={24} md={8}>
+                    <Form.Item label="City" name="city" rules={[{ required: true }]}>
+                      <Input />
+                    </Form.Item>
+                  </Col>
+                  
+                </Row>
+
+      
+              </Form>
+            </Modal>
       <div
         style={{ background: "#fff", borderRadius: 8, padding: 24, margin: 16 }}
       >
         <Form
           form={form}
           layout="vertical"
-          onFinish={handleFormSubmit}
+          onFinish={(values) => {
+            setEditValues(values);      // <-- set the values to show in modal
+            setShowEditModal(true);     // <-- open the modal
+          }}
           initialValues={{
             firstName: "",
             lastName: "",

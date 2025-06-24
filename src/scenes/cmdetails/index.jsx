@@ -19,7 +19,7 @@ import { Country } from "country-state-city";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const { Text } = Typography;
-const { Option } = Select;
+// const { Option } = Select;
 
 function centerAspectCrop(mediaWidth, mediaHeight, aspect) {
   const cropWidth = mediaWidth * 0.9;
@@ -607,13 +607,13 @@ const CmDetails = () => {
             </Col>
             <Col xs={24} md={8}>
               <Form.Item
-                label={<Text strong>Branch</Text>}
+                label={<Text strong>Organization Unit</Text>}
                 name="branch"
-                rules={[{ required: true, message: "Branch is required" }]}
+                rules={[{ required: true, message: "Organization Unit is required" }]}
               >
                 <Select
                   showSearch
-                  placeholder="Select Branch"
+                  placeholder="Select Organization Unit"
                   disabled={!isEditing}
                   size="large"
                   style={{ borderRadius: 8, background: "#fff", fontSize: 16 }}
