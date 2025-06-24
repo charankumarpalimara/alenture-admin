@@ -96,7 +96,8 @@ const Profile = () => {
     }
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/v1/updateAdminProfile`,
+        // `${process.env.REACT_APP_API_URL}/v1/updateAdminProfile`,
+        `http://127.0.0.1:8080/v1/updateAdminProfile`,
         formData,
         {
           headers: {
@@ -106,7 +107,7 @@ const Profile = () => {
       );
 
       message.success("Profile updated successfully!");
-      let updatedUserDetails = { ...sessionData, password };
+      let updatedUserDetails = { ...sessionData, passwords : password, firstname: firstName, lastname: lastName, email: email, mobile: phoneNo, extraind2: values.gender };
       if (response.data && response.data.imageUrl) {
         updatedUserDetails.imageUrl = response.data.imageUrl;
       }

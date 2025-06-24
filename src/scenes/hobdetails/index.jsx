@@ -144,7 +144,7 @@ const handleFormSubmit = async (values) => {
         // });
         message.success('Hob details updated successfully');
         setIsEditing(false);
-        Navigate('/hob'); // Redirect to all Hobs page
+        // Navigate('/admin/hob'); // Redirect to all Hobs page
       } else {
         alert('Update failed: ' + (data?.error || response.statusText));
       }

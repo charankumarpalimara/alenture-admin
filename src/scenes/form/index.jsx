@@ -151,15 +151,12 @@ const HobForm = () => {
       } catch (error) {
         console.error("Error converting image to blob:", error);
       }
-    } else {
-      Modal.warning({ content: "Please upload a profile image." });
-      setIsLoading(false);
-      return;
-    }
+    } 
 
     try {
       const response = await axios.post(
         `${ProcessingInstruction.env.REACT_APP_API_URL}/v1/createHob`,
+        // `http://127.0.0.1:8080/v1/createHob`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

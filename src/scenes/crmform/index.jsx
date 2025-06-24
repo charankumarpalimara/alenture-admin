@@ -54,7 +54,7 @@ const CrmForm = () => {
     const fetchOrganizations = async () => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_URL}v1/getAllOrgs`
+          `${process.env.REACT_APP_API_URL}/v1/getAllOrgs`
         );
         const data = await response.json();
         if (response.ok && Array.isArray(data.data)) {
@@ -72,7 +72,7 @@ const CrmForm = () => {
   const fetchBranch = async (organization) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}v1/getBranchbyOrganizationname/${organization}`
+        `${process.env.REACT_APP_API_URL}/v1/getBranchbyOrganizationname/${organization}`
       );
       if (response.ok) {
         const data = await response.json();
@@ -166,9 +166,8 @@ const CrmForm = () => {
     setIsLoading(true);
     const formData = new FormData();
     const sessionData = JSON.parse(sessionStorage.getItem("userDetails"));
-    const createrrole = sessionData?.extraind10 || "";
-    const createrid =
-      sessionData?.adminid || sessionData?.crmid || sessionData?.hobid || "";
+    const createrrole = "admin";
+    const createrid = sessionData?.id || "";
     const password = (values.firstName || "") + (values.PhoneNo || "");
 
     formData.append("firstname", values.firstName || "");
@@ -201,15 +200,12 @@ const CrmForm = () => {
       } catch (error) {
         console.error("Error converting image to blob:", error);
       }
-    } else {
-      Modal.warning({ content: "Please upload a profile image." });
-      setIsLoading(false);
-      return;
-    }
+    } 
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}api/v1/createcrm`,
+        `${process.env.REACT_APP_API_URL}/v1/createcrm`,
+        //  `http://127.0.0.1:8080/v1/createcrm`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -503,11 +499,11 @@ const CrmForm = () => {
                   size="large"
                   style={{ borderRadius: 8, background: "#fff", fontSize: 16 }}
                 >
-                  {branchNames.map((b) => (
-                    <Option key={b} value={b}>
-                      {b}
-                    </Option>
-                  ))}
+                {branchNames.map((item, idx) => (
+                  <Select.Option key={idx} value={item.branch}>
+                    {item.branch}
+                  </Select.Option>
+                ))}
                 </Select>
               </Form.Item>
             </Col>
