@@ -232,7 +232,7 @@ const OrganizationDetails = () => {
                     </Select>
                   </Col>
                   <Col xs={24} md={8}>
-                    <Typography.Text strong>Branch Unit</Typography.Text>
+                    <Typography.Text strong>Organization Unit</Typography.Text>
                     <Input
                       value={editData.branch}
                       onChange={(e) =>
