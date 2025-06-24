@@ -107,7 +107,7 @@ const Profile = () => {
       );
 
       message.success("Profile updated successfully!");
-      let updatedUserDetails = { ...sessionData, passwords : password, firstname: firstName, lastname: lastName, email: email, mobile: phoneNo, extraind2: values.gender };
+      let updatedUserDetails = { ...sessionData, password : password, firstname: values.firstName, lastname: values.lastName, email: values.email, mobile: values.PhoneNo, extraind2: values.gender };
       if (response.data && response.data.imageUrl) {
         updatedUserDetails.imageUrl = response.data.imageUrl;
       }
