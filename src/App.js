@@ -66,7 +66,7 @@ function App() {
   const [isSidebar, setIsSidebar] = useState(true);
   const isMobile = useMediaQuery("(max-width: 900px)");
   const [isAuthenticated, setIsAuthenticated] = useState(
-    !!sessionStorage.getItem("token")
+    !!sessionStorage.getItem("userDetails")
   );
 
   const handleLogin = () => {
@@ -75,7 +75,7 @@ function App() {
   const handlelogout = () => {
     setIsAuthenticated(false);
     sessionStorage.removeItem("token"); // Remove the authentication token
-    sessionStorage.removeItem("user"); // Remove user data
+    sessionStorage.removeItem("userDetails"); // Remove user data
   };
 
   // Create theme with Poppins font

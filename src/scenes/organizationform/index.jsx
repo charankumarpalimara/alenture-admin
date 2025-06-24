@@ -35,7 +35,7 @@ const OrganizationForm = () => {
       ...branchInstances,
       {
         organization: "",
-        branch: "",
+        // branch: "",
         email: "",
         phoneCode: "",
         phoneno: "",
@@ -84,7 +84,7 @@ const OrganizationForm = () => {
       for (const branch of branchInstances) {
         const formData = new FormData();
         formData.append("organizationname", branch.organization);
-        formData.append("branch", branch.branch);
+        formData.append("branch", branch.province);
         // formData.append("branchtype", branch.branchtype || 'Parent');
         formData.append("phonecode", branch.phoneCode);
         formData.append("mobile", branch.phoneno);
@@ -212,7 +212,7 @@ const OrganizationForm = () => {
                     />
                   </Form.Item>
                 </Col>
-                <Col xs={24} md={8}>
+                {/* <Col xs={24} md={8}>
                   <Form.Item
                     label="Branch Name"
                     name={[index, "branch"]}
@@ -236,7 +236,7 @@ const OrganizationForm = () => {
                       }}
                     />
                   </Form.Item>
-                </Col>
+                </Col> */}
 
                 <Col xs={24} md={8}>
                   <Form.Item label={<b>Phone Number</b>} required>

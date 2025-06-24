@@ -179,7 +179,7 @@ const OrganizationDetails = () => {
         }}
       >
         <Typography.Title level={5} style={{ margin: "16px 0 8px 0" }}>
-          Branches
+          Organization
         </Typography.Title>
         <Collapse
           accordion
@@ -216,8 +216,8 @@ const OrganizationDetails = () => {
                       style={{ marginBottom: 12 }}
                     />
                   </Col>
-                  <Col xs={24} md={8}>
-                    <Typography.Text strong>Branch Type</Typography.Text>
+                  <Col xs={24} md={8} style={{ display:"none"}}>
+                    <Typography.Text strong style={{ display:"none"}}>Branch Type</Typography.Text>
                     <Select
                       value={editData.branchtype}
                       onChange={(value) =>
@@ -225,20 +225,20 @@ const OrganizationDetails = () => {
                       }
                       size="large"
                       disabled={!isEditing}
-                      style={{ width: "100%", marginBottom: 12 }}
+                      style={{ width: "100%", marginBottom: 12, display:"none" }}
                     >
                       <Select.Option value="Parent">Parent</Select.Option>
                       <Select.Option value="Branch">Branch</Select.Option>
                     </Select>
                   </Col>
                   <Col xs={24} md={8}>
-                    <Typography.Text strong>Branch Name</Typography.Text>
+                    <Typography.Text strong>Branch Unit</Typography.Text>
                     <Input
                       value={editData.branch}
                       onChange={(e) =>
                         handleBranchInputChange("branch", e.target.value)
                       }
-                      placeholder="Branch Name"
+                      placeholder="Branch Unit"
                       size="large"
                       disabled={!isEditing}
                       style={{ marginBottom: 12 }}
@@ -421,7 +421,7 @@ const OrganizationDetails = () => {
             fontWeight: "bold",
           }}
         >
-          Create New Branch
+        Add New Unit
         </Button>
       </Box>
     </>

@@ -96,8 +96,8 @@ const Profile = () => {
     }
     try {
       const response = await axios.post(
-        // `${process.env.REACT_APP_API_URL}/v1/updateAdminProfile`,
-        `http://127.0.0.1:8080/v1/updateAdminProfile`,
+        `${process.env.REACT_APP_API_URL}/v1/updateAdminProfile`,
+        // `http://127.0.0.1:8080/v1/updateAdminProfile`,
         formData,
         {
           headers: {

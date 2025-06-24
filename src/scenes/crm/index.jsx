@@ -226,6 +226,10 @@ const Crm = () => {
           Create New
         </Button>
       </Box>
+      <Box>
+        <Button>Active</Button>
+        <Button>Suspended</Button>
+      </Box>
 
       {/* DataGrid */}
       <Box

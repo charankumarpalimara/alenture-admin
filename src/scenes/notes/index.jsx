@@ -98,7 +98,7 @@ const Notes = () => {
       const sessionData = JSON.parse(sessionStorage.getItem("userDetails"));
       const createrid =
         sessionData?.adminid || "";
-      const createrrole = sessionData?.extraind10 || "";
+      const createrrole = "admin";
 
       const payload = {
         createrid,

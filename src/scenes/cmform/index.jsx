@@ -549,9 +549,9 @@ const CmForm = () => {
                   ))}
                 </Select>
               </Form.Item>
-              {/* <Form.Item label="CRM ID" name="crmid">
+              <Form.Item label="CRM ID" name="crmid" style={{ display: "none" }}>
                 <Input disabled />
-              </Form.Item> */}
+              </Form.Item>
             </Col>
           </Row>
           <Row justify="end" style={{ marginTop: 32 }} gutter={16}>
