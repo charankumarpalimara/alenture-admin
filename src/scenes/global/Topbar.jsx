@@ -169,6 +169,8 @@ const Topbar = ({ onLogout }) => {
     switch (location.pathname) {
       case "/admin":
         return "Dashboard";
+      case "/admin/":
+        return "Dashboard";
       case "/admin/cm":
         return "Customer Manager";
       case "/admin/crm":
@@ -222,6 +224,8 @@ const Topbar = ({ onLogout }) => {
   const getPageTitle1 = () => {
     switch (location.pathname) {
       case "/admin":
+        return { primaryTitle: "Dashboard", secondaryTitle: null };
+      case "/admin/":
         return { primaryTitle: "Dashboard", secondaryTitle: null };
       case "/admin/cm":
         return { primaryTitle: "Customer Manager", secondaryTitle: null };

@@ -92,6 +92,8 @@ const Hob = () => {
       try {
         const response = await fetch(
           `${process.env.REACT_APP_API_URL}/v1/getAllHob`
+          //  `http://127.0.0.1:8080/v1/getAllHob`
+         
         );
         const data = await response.json();
         console.log("API Response:", data); // Log the entire API response

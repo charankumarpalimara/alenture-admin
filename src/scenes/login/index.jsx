@@ -9,7 +9,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Form, Input, message} from "antd";
 import Logo from "./logo.png";
 
@@ -21,7 +21,7 @@ const Login = ({ onLogin }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
     // const [loading, setLoading] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -43,6 +43,8 @@ const Login = ({ onLogin }) => {
         onLogin();
         sessionStorage.setItem("token", data.token);
         sessionStorage.setItem("userDetails", JSON.stringify(data.data));
+        message.success("Login successful");
+        //  navigate("/admin");
       } else {
         message.error(data.error || "Invalid credentials");
       }

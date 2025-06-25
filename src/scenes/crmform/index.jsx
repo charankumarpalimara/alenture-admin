@@ -342,12 +342,7 @@ const CrmForm = () => {
               </Form.Item>
             </Col>
             </Row>
-            {/* <Form.Item label="Organization" name="organization" rules={[{ required: true }]}>
-      <Input />
-    </Form.Item>
-    <Form.Item label="Branch" name="branch" rules={[{ required: true }]}>
-      <Input />
-    </Form.Item> */}
+ 
         <Row gutter={24}>
 
             <Col xs={24} md={8}>
