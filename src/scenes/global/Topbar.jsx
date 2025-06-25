@@ -62,6 +62,7 @@ const getActivePage = (pathname) => {
     return "/admin/organization";
   } else if (
     pathname === "/admin" ||
+     pathname === "/admin/" ||
     pathname.includes("/admin/ticketdetails") ||
     pathname.includes("/admin/allExperiences") ||
     pathname.includes("/admin/newExperiences") ||
