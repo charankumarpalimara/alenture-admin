@@ -19,7 +19,7 @@ import { CameraOutlined } from "@ant-design/icons";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import { Country, State } from "country-state-city";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const { Text } = Typography;
 // const { Option } = Select;
@@ -53,7 +53,7 @@ const CrmDetails = () => {
   const imgRef = useRef(null);
   const fileInputRef = useRef(null);
   const location = useLocation();
-  // const Navigate = useNavigate();
+  const Navigate = useNavigate();
   const [organizationNames, setOrganizationNames] = useState([]);
   const [branchNames, setBranchNames] = useState([]);
   const [cmNames, setCmNames] = useState([]);
@@ -1010,7 +1010,7 @@ const CrmDetails = () => {
                       .filter(cm => cm && cm.cmid && cm.name)
                       .map((cm) => (
                         <Select.Option key={cm.cmid} value={cm.cmid}>
-                          {cm.name} 
+                          {cm.name}
                         </Select.Option>
                       ))}
                   </Select>
@@ -1021,7 +1021,7 @@ const CrmDetails = () => {
                   <Input disabled />
                 </Form.Item>
               </Col>
-               <Row gutter={16} style={{ display: "flex", justifyContent: "flex-end" }}>
+              <Row gutter={16} style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Col>
                   <Space>
                     <Button
@@ -1060,21 +1060,74 @@ const CrmDetails = () => {
         {/* Form Actions moved outside the Form to keep buttons always enabled */}
         <Row justify="end" style={{ marginTop: 32 }} gutter={16}>
           {!isEditing ? (
-            <Col>
-              <Button
-                type="primary"
-                style={{
-                  background: "#3e4396",
-                  color: "#fff",
-                  fontWeight: "bold",
-                  borderRadius: 8,
-                }}
-                size="large"
-                onClick={() => setIsEditing(true)}
-              >
-                Edit
-              </Button>
-            </Col>
+            <Row style={{ width: "100%", justifyContent: "space-between" }} gutter={16}>
+              <Col>
+                <Button
+                  variant="contained"
+                  size="large"
+                  danger
+                  sx={{
+                    padding: "12px 24px",
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    borderRadius: "8px",
+                    boxShadow: "3px 3px 6px rgba(0, 0, 0, 0.2)",
+                    transition: "0.3s",
+                    backgroundColor: "#af3f3b",
+                    color: "#ffffff",
+                    textTransform: "none",
+                    "&:hover": {
+                      backgroundColor: "#db4f4a",
+                      boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.3)",
+                    },
+                  }}
+                  onClick={() => {
+                    Modal.confirm({
+                      title: "Are you sure you want to delete this Customer Manager?",
+                      content: "This action cannot be undone.",
+                      okText: "Yes, Delete",
+                      okType: "danger",
+                      cancelText: "Cancel",
+                      onOk: async () => {
+                        try {
+                          await fetch(
+                            `${process.env.REACT_APP_API_URL}/v1/deleteCrmByAdminAndHob`,
+                            {
+                              method: "POST",
+                              headers: { "Content-Type": "application/json" },
+                              body: JSON.stringify({
+                                crmid: ticket.crmid,
+                              }),
+                            }
+                          );
+                          message.success("Crm deleted successfully!");
+                          Navigate("/admin/crm");
+                        } catch (error) {
+                          message.error("Failed to delete Crm.");
+                        }
+                      },
+                    });
+                  }}
+                >
+                  Delete
+                </Button>
+              </Col>
+              <Col>
+                <Button
+                  type="primary"
+                  style={{
+                    background: "#3e4396",
+                    color: "#fff",
+                    fontWeight: "bold",
+                    borderRadius: 8,
+                  }}
+                  size="large"
+                  onClick={() => setIsEditing(true)}
+                >
+                  Edit
+                </Button>
+              </Col>
+            </Row>
           ) : (
             <>
               <Col>

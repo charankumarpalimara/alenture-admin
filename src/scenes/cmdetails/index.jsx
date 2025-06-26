@@ -760,21 +760,74 @@ const CmDetails = () => {
         </Form>
         <Row justify="end" style={{ marginTop: 32 }} gutter={16}>
           {!isEditing ? (
-            <Col>
-              <Button
-                type="primary"
-                style={{
-                  background: "#3e4396",
-                  color: "#fff",
-                  fontWeight: "bold",
-                  borderRadius: 8,
-                }}
-                size="large"
-                onClick={() => setIsEditing(true)}
-              >
-                Edit
-              </Button>
-            </Col>
+            <Row style={{ width: "100%", justifyContent:"space-between" }} gutter={16}>
+              <Col>
+                <Button
+                  variant="contained"
+                  size="large"
+                  danger
+                  sx={{
+                    padding: "12px 24px",
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    borderRadius: "8px",
+                    boxShadow: "3px 3px 6px rgba(0, 0, 0, 0.2)",
+                    transition: "0.3s",
+                    backgroundColor: "#af3f3b",
+                    color: "#ffffff",
+                    textTransform: "none",
+                    "&:hover": {
+                      backgroundColor: "#db4f4a",
+                      boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.3)",
+                    },
+                  }}
+                  onClick={() => {
+                    Modal.confirm({
+                      title: "Are you sure you want to delete this Customer Manager?",
+                      content: "This action cannot be undone.",
+                      okText: "Yes, Delete",
+                      okType: "danger",
+                      cancelText: "Cancel",
+                      onOk: async () => {
+                        try {
+                          await fetch(
+                            `${process.env.REACT_APP_API_URL}/v1/deleteCmByAdminAndHob`,
+                            {
+                              method: "POST",
+                              headers: { "Content-Type": "application/json" },
+                              body: JSON.stringify({
+                                cmid: ticket.id,
+                              }),
+                            }
+                          );
+                          message.success("Cm deleted successfully!");
+                          Navigate("/admin/cm");
+                        } catch (error) {
+                          message.error("Failed to delete Cm.");
+                        }
+                      },
+                    });
+                  }}
+                >
+                  Delete
+                </Button>
+              </Col>
+              <Col>
+                <Button
+                  type="primary"
+                  style={{
+                    background: "#3e4396",
+                    color: "#fff",
+                    fontWeight: "bold",
+                    borderRadius: 8,
+                  }}
+                  size="large"
+                  onClick={() => setIsEditing(true)}
+                >
+                  Edit
+                </Button>
+              </Col>
+            </Row>
           ) : (
             <>
               <Col>

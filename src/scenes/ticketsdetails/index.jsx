@@ -98,10 +98,10 @@ const TicketDetails = () => {
     }
   };
 
-  const handleFormSubmit = (values) => {
-    const fullPhoneNumber = `${values.phoneCode}${values.PhoneNo}`;
-    console.log("Form Data:", { ...values, fullPhoneNumber });
-  };
+  // const handleFormSubmit = (values) => {
+  //   const fullPhoneNumber = `${values.phoneCode}${values.PhoneNo}`;
+  //   console.log("Form Data:", { ...values, fullPhoneNumber });
+  // };
 
   const columns = [
     {
@@ -327,10 +327,17 @@ const TicketDetails = () => {
 const fileUrl = ticket.imageUrl || ""; // your file URL
 const filename = fileUrl.split("/").pop() || "attachment";
 
-const handleDownload = async () => {
+const handleDownload = async (fileUrl) => {
+  if (!fileUrl) {
+    message.error("No attachment available.");
+    return;
+  }
   setIsDownloading(true);
   try {
     const response = await fetch(fileUrl);
+    if (!response.ok) {
+      throw new Error("File not found or server error");
+    }
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -342,6 +349,7 @@ const handleDownload = async () => {
     window.URL.revokeObjectURL(url);
   } catch (error) {
     console.error("Download failed:", error);
+    message.error("Download failed. Please try again or contact support.");
   } finally {
     setIsDownloading(false);
   }
@@ -887,7 +895,7 @@ const handleDownload = async () => {
         <Formik
           initialValues={initialValues}
           validationSchema={checkoutSchema}
-          onSubmit={handleFormSubmit}
+          // onSubmit={handleFormSubmit}
         >
           {({
             values,
@@ -1084,7 +1092,16 @@ const handleDownload = async () => {
                     Experience
                   </Typography>
                   <Typography
-                    sx={{ color: getExperienceColor(values.experience) }}
+                    sx={{       color:
+        values.experience?.trim() === "Frustrated"
+          ? "#E64A19"
+          : values.experience?.trim() === "Extremely Frustrated"
+          ? "#D32F2F"
+          : values.experience?.trim() === "Happy"
+          ? "#FBC02D"
+          : values.experience?.trim() === "Extremely Happy"
+          ? "#388E3C"
+          : "#616161", }}
                   >
                     {values.experience}
                   </Typography>
