@@ -329,7 +329,7 @@ const CrmDetails = () => {
         formData.append(key, value);
       });
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}}/v1/createRelation`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/v1/createRelation`, {
         method: "POST",
         body: formData,
       });
