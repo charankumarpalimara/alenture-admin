@@ -1083,7 +1083,7 @@ const CrmDetails = () => {
                   }}
                   onClick={() => {
                     Modal.confirm({
-                      title: "Are you sure you want to delete this Customer Manager?",
+                      title: "Are you sure you want to delete this CRM?",
                       content: "This action cannot be undone.",
                       okText: "Yes, Delete",
                       okType: "danger",
