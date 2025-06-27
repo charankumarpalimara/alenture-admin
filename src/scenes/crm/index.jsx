@@ -107,6 +107,7 @@ const Crm = () => {
         const data = await response.json();
         if (response.ok && Array.isArray(data.data)) {
           const transformedData = data.data.map((item) => ({
+            id: item.id,
             crmid: item.crmid || "N/A",
             name: `${item.firstname || ""} ${item.lastname || ""}`.trim(),
             firstname: item.firstname || "N/A",
@@ -375,7 +376,7 @@ const Crm = () => {
           columns={columns}
           pageSize={10}
           // rowsPerPageOptions={[10, 25, 50]} // Add this to include 10 in the options
-          getRowId={(row) => row.crmid} // Use `crmid` as the unique identifier
+          getRowId={(row) => row.id} // Use `crmid` as the unique identifier
           onRowClick={handleRowClick}
           sx={{
             "& .MuiDataGrid-cell": {
