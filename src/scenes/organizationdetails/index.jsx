@@ -140,6 +140,27 @@ const OrganizationDetails = () => {
   const handleBranchInputChange = (field, value) => {
     setBranchEdits((prev) => ({ ...prev, [field]: value }));
   };
+    const handleBranchDelete = async (idx) => {
+    const branch = sortedBranches[idx];
+    if (!branch || !branch.id) return;
+    setIsLoading(true);
+    try {
+      await axios.delete(
+        // `${process.env.REACT_APP_API_URL}/v1/OrganizationDelete/${branch.id}`
+         `http://127.0.0.1:8080/v1/OrganizationDelete/${branch.id}`
+      );
+      // Remove from local state
+      setBranchesData((prev) => prev.filter((b) => b.id !== branch.id));
+      message.success("Oganization Unit deleted successfully!");
+    } catch (error) {
+      message.error("Error deleting branch");
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
 
   return (
     <>
@@ -179,7 +200,7 @@ const OrganizationDetails = () => {
         }}
       >
         <Typography.Title level={5} style={{ margin: "16px 0 8px 0" }}>
-          Organization
+          Oragnization
         </Typography.Title>
         <Collapse
           accordion
@@ -216,8 +237,8 @@ const OrganizationDetails = () => {
                       style={{ marginBottom: 12 }}
                     />
                   </Col>
-                  <Col xs={24} md={8} style={{ display:"none"}}>
-                    <Typography.Text strong style={{ display:"none"}}>Branch Type</Typography.Text>
+                  <Col xs={24} md={8} style={{ display: "none" }}>
+                    <Typography.Text strong>Branch Type</Typography.Text>
                     <Select
                       value={editData.branchtype}
                       onChange={(value) =>
@@ -225,14 +246,14 @@ const OrganizationDetails = () => {
                       }
                       size="large"
                       disabled={!isEditing}
-                      style={{ width: "100%", marginBottom: 12, display:"none" }}
+                      style={{ width: "100%", marginBottom: 12 }}
                     >
                       <Select.Option value="Parent">Parent</Select.Option>
                       <Select.Option value="Branch">Branch</Select.Option>
                     </Select>
                   </Col>
                   <Col xs={24} md={8}>
-                    <Typography.Text strong>Organization Unit</Typography.Text>
+                    <Typography.Text strong>Branch Unit</Typography.Text>
                     <Input
                       value={editData.branch}
                       onChange={(e) =>
@@ -322,7 +343,7 @@ const OrganizationDetails = () => {
                       style={{ marginBottom: 12 }}
                     />
                   </Col>
-                  <Col xs={24} md={8}>
+                  {/* <Col xs={24} md={8}>
                     <Typography.Text strong>Address</Typography.Text>
                     <Input
                       value={editData.address}
@@ -334,7 +355,7 @@ const OrganizationDetails = () => {
                       disabled={!isEditing}
                       style={{ marginBottom: 12 }}
                     />
-                  </Col>
+                  </Col> */}
                   <Col xs={24} md={8}>
                     <Typography.Text strong>Postal Code</Typography.Text>
                     <Input
@@ -386,6 +407,7 @@ const OrganizationDetails = () => {
                       <Button onClick={handleBranchCancel}>Cancel</Button>
                     </>
                   ) : (
+                    <>
                     <Button
                       type="primary"
                       onClick={() => handleBranchEdit(idx)}
@@ -398,6 +420,23 @@ const OrganizationDetails = () => {
                     >
                       Edit
                     </Button>
+                    <Button
+                      // type="outlined"
+                      onClick={() => handleBranchDelete(idx)}
+                      // size="small"
+                      danger
+                      style={{
+                        // backgroundColor: "#3e4396",
+                        // color: "#fff",
+                        fontWeight: "bold",
+                        marginRight: 8,
+                        // borderColor: "#f8dcdb",
+
+                      }}
+                    >
+                      Delete
+                    </Button>
+                    </>
                   )}
                 </div>
               </Collapse.Panel>
@@ -407,7 +446,7 @@ const OrganizationDetails = () => {
         <Button
           type="primary"
           onClick={() => {
-            Navigate("/admin/organizationadd", {
+            Navigate("/hob/organizationadd", {
               state: {
                 organizationid: ticket.id,
                 organizationname: ticket.name,
@@ -421,7 +460,7 @@ const OrganizationDetails = () => {
             fontWeight: "bold",
           }}
         >
-        Add Oranization Unit
+          Add New Unit
         </Button>
       </Box>
     </>
