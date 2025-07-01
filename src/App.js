@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { CssBaseline, Box, useMediaQuery } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Import Poppins font weights
 import "@fontsource/poppins/300.css"; // Light
@@ -65,6 +66,7 @@ function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
   const isMobile = useMediaQuery("(max-width: 900px)");
+  const queryClient = new QueryClient();
   const [isAuthenticated, setIsAuthenticated] = useState(
     !!sessionStorage.getItem("userDetails")
   );
@@ -126,126 +128,131 @@ function App() {
   });
 
   return (
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={appTheme}>
-        <CssBaseline />
+    <QueryClientProvider client={queryClient}>
+      <ColorModeContext.Provider value={colorMode}>
+        <ThemeProvider theme={appTheme}>
+          <CssBaseline />
 
-        {/* Conditionally render Topbar and Sidebar based on authentication */}
-        {isAuthenticated && (
-          <>
-            <Box sx={{ width: "100vw", top: 5, zIndex: 1000 }}>
-              <Topbar setIsSidebar={setIsSidebar} onLogout={handlelogout} />
-            </Box>
-
-            {!isMobile && isSidebar && (
-              <Box
-                sx={{
-                  position: "fixed",
-                  left: 0,
-                  top: "64px",
-                  height: "calc(100vh - 64px)",
-                  width: "260px",
-                  zIndex: 900,
-                }}
-              >
-                <Sidebar isSidebar={isSidebar} onLogout={handlelogout} />
+          {/* Conditionally render Topbar and Sidebar based on authentication */}
+          {isAuthenticated && (
+            <>
+              <Box sx={{ width: "100vw", top: 5, zIndex: 1000 }}>
+                <Topbar setIsSidebar={setIsSidebar} onLogout={handlelogout} />
               </Box>
-            )}
-          </>
-        )}
 
-        {/* Main Content */}
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            marginLeft: isMobile
-              ? "0px"
-              : isSidebar && isAuthenticated
-              ? "260px"
-              : "0px",
-            marginTop: isAuthenticated ? "0px" : "60px",
-            padding: "20px 20px 20px",
-            overflowY: "auto",
-            transition: "margin 0.3s ease-in-out",
-            "&::-webkit-scrollbar": {
-              width: "1px",
-              height: "5px",
-            },
-            "&::-webkit-scrollbar-track": {
-              backgroundColor: "#000000",
-              borderRadius: "4px",
-            },
-            fontFamily: "Poppins, sans-serif !important",
-          }}
-        >
-          {/* Conditionally render Routes */}
-          <Routes>
-            {!isAuthenticated ? (
-              <Route path="*" element={<Login onLogin={handleLogin} />} />
-            ) : (
-              <>
-                <Route path="/admin" element={<Dashboard />} />
-                <Route
-                  path="/admin/allExperiences"
-                  element={<AllExperiences />}
-                />
-                <Route
-                  path="/admin/newExperiences"
-                  element={<NewExperiences />}
-                />
-                <Route
-                  path="/admin/pendingExperiences"
-                  element={<PendingExperiences />}
-                />
-                <Route
-                  path="/admin/resolvedExperiences"
-                  element={<ResolvedExperiences />}
-                />
-                <Route path="/admin/cm" element={<Cm />} />
-                <Route path="/admin/crm" element={<Crm />} />
-                <Route path="/admin/hob" element={<Hob />} />
+              {!isMobile && isSidebar && (
+                <Box
+                  sx={{
+                    position: "fixed",
+                    left: 0,
+                    top: "64px",
+                    height: "calc(100vh - 64px)",
+                    width: "260px",
+                    zIndex: 900,
+                  }}
+                >
+                  <Sidebar isSidebar={isSidebar} onLogout={handlelogout} />
+                </Box>
+              )}
+            </>
+          )}
 
-                <Route path="/admin/organization" element={<Organization />} />
-                <Route path="/admin/profile" element={<Profile />} />
-                <Route path="/admin/notes" element={<Notes />} />
-                <Route path="/admin/form" element={<HobForm />} />
-                <Route path="/admin/cmform" element={<CmForm />} />
-                <Route path="/admin/crmform" element={<CrmForm />} />
-                <Route path="/admin/bsuform" element={<BsuForm />} />
-                <Route
-                  path="/admin/organizationform"
-                  element={<OrganizationForm />}
-                />
-                <Route path="/admin/cmdetails" element={<CmDetails />} />
-                <Route path="/admin/crmdetails" element={<CrmDetails />} />
-                <Route
-                  path="/admin/organizationdetails"
-                  element={<OrganizationDetails />}
-                />
-                <Route
-                  path="/admin/organizationadd"
-                  element={<Organizationadd />}
-                />
-                <Route path="/admin/hobdetails" element={<HobDetails />} />
-                <Route
-                  path="/admin/ticketdetails"
-                  element={<TicketDetails />}
-                />
-                <Route path="/admin/taskdetails" element={<TaskDetails />} />
-                {/* <Route path="/bar" element={<Bar />} /> */}
-                {/* <Route path="/pie" element={<Pie />} /> */}
-                <Route path="/admin/line" element={<Line />} />
-                <Route path="/admin/faq" element={<FAQ />} />
-                <Route path="/admin/calendar" element={<Calendar />} />
-                {/* <Route path="/geography" element={<Geography />} /> */}
-                <Route path="*" element={<Navigate to="/admin" />} />
-              </>
-            )}
-          </Routes>
-        </Box>
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+          {/* Main Content */}
+          <Box
+            component="main"
+            sx={{
+              flexGrow: 1,
+              marginLeft: isMobile
+                ? "0px"
+                : isSidebar && isAuthenticated
+                ? "260px"
+                : "0px",
+              marginTop: isAuthenticated ? "0px" : "60px",
+              padding: "20px 20px 20px",
+              overflowY: "auto",
+              transition: "margin 0.3s ease-in-out",
+              "&::-webkit-scrollbar": {
+                width: "1px",
+                height: "5px",
+              },
+              "&::-webkit-scrollbar-track": {
+                backgroundColor: "#000000",
+                borderRadius: "4px",
+              },
+              fontFamily: "Poppins, sans-serif !important",
+            }}
+          >
+            {/* Conditionally render Routes */}
+            <Routes>
+              {!isAuthenticated ? (
+                <Route path="*" element={<Login onLogin={handleLogin} />} />
+              ) : (
+                <>
+                  <Route path="/admin" element={<Dashboard />} />
+                  <Route
+                    path="/admin/allExperiences"
+                    element={<AllExperiences />}
+                  />
+                  <Route
+                    path="/admin/newExperiences"
+                    element={<NewExperiences />}
+                  />
+                  <Route
+                    path="/admin/pendingExperiences"
+                    element={<PendingExperiences />}
+                  />
+                  <Route
+                    path="/admin/resolvedExperiences"
+                    element={<ResolvedExperiences />}
+                  />
+                  <Route path="/admin/cm" element={<Cm />} />
+                  <Route path="/admin/crm" element={<Crm />} />
+                  <Route path="/admin/hob" element={<Hob />} />
+
+                  <Route
+                    path="/admin/organization"
+                    element={<Organization />}
+                  />
+                  <Route path="/admin/profile" element={<Profile />} />
+                  <Route path="/admin/notes" element={<Notes />} />
+                  <Route path="/admin/form" element={<HobForm />} />
+                  <Route path="/admin/cmform" element={<CmForm />} />
+                  <Route path="/admin/crmform" element={<CrmForm />} />
+                  <Route path="/admin/bsuform" element={<BsuForm />} />
+                  <Route
+                    path="/admin/organizationform"
+                    element={<OrganizationForm />}
+                  />
+                  <Route path="/admin/cmdetails" element={<CmDetails />} />
+                  <Route path="/admin/crmdetails" element={<CrmDetails />} />
+                  <Route
+                    path="/admin/organizationdetails"
+                    element={<OrganizationDetails />}
+                  />
+                  <Route
+                    path="/admin/organizationadd"
+                    element={<Organizationadd />}
+                  />
+                  <Route path="/admin/hobdetails" element={<HobDetails />} />
+                  <Route
+                    path="/admin/ticketdetails"
+                    element={<TicketDetails />}
+                  />
+                  <Route path="/admin/taskdetails" element={<TaskDetails />} />
+                  {/* <Route path="/bar" element={<Bar />} /> */}
+                  {/* <Route path="/pie" element={<Pie />} /> */}
+                  <Route path="/admin/line" element={<Line />} />
+                  <Route path="/admin/faq" element={<FAQ />} />
+                  <Route path="/admin/calendar" element={<Calendar />} />
+                  {/* <Route path="/geography" element={<Geography />} /> */}
+                  <Route path="*" element={<Navigate to="/admin" />} />
+                </>
+              )}
+            </Routes>
+          </Box>
+        </ThemeProvider>
+      </ColorModeContext.Provider>
+    </QueryClientProvider>
   );
 }
 
